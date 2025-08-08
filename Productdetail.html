@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Product Detail | Local Treasures</title>
+  <style>
+    /* Reset & base */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      background-color: #fafafa;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    button {
+      cursor: pointer;
+      font-weight: 600;
+      border: none;
+      border-radius: 5px;
+      padding: 0.75rem 1.5rem;
+      background-color: #0db14b;
+      color: white;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #0a8b36;
+    }
+    input[type="number"] {
+      width: 60px;
+      padding: 0.3rem 0.5rem;
+      font-size: 1rem;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      text-align: center;
+      margin-left: 0.5rem;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 20px 3rem;
+      width: 100%;
+      flex-grow: 1;
+    }
+    /* Header */
+    header {
+      background-color: #181d48;
+      color: white;
+      padding: 1rem 0;
+    }
+    header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+    nav a {
+      margin-left: 1.5rem;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: #0db14b;
+    }
+    nav a[aria-current="page"] {
+      color: #0db14b;
+      font-weight: 700;
+    }
+    /* Breadcrumb */
+    .breadcrumb {
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      color: #666;
+    }
+    .breadcrumb a {
+      color: #0db14b;
+    }
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+    .breadcrumb span {
+      margin: 0 0.3rem;
+    }
+    /* Product Detail Grid */
+    .product-detail {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 8px 25px rgb(0 0 0 / 0.1);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    /* Tabs */
+    .product-tabs {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      border-bottom: 2px solid #0db14b;
+      margin-bottom: 1rem;
+    }
+    .product-tab {
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      border-radius: 6px 6px 0 0;
+      background-color: #e4f5e7;
+      font-weight: 700;
+      color: #0a8b36;
+      user-select: none;
+      transition: background-color 0.3s ease;
+    }
+    .product-tab.active {
+      background-color: #0db14b;
+      color: white;
+    }
+    /* Product content */
+    .product-content {
+      display: none;
+      gap: 2rem;
+      grid-template-columns: 1fr 1fr;
+    }
+    .product-content.active {
+      display: grid;
+    }
+    @media (max-width: 700px) {
+      .product-content.active {
+        grid-template-columns: 1fr;
+      }
+    }
+    /* Images */
+    .product-images {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .main-image {
+      width: 100%;
+      border-radius: 12px;
+      object-fit: cover;
+      aspect-ratio: 4 / 3;
+      box-shadow: 0 4px 10px rgb(0 0 0 / 0.1);
+    }
+    .thumbnail-row {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .thumbnail {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 8px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: border-color 0.3s ease;
+    }
+    .thumbnail:hover,
+    .thumbnail.active {
+      border-color: #0db14b;
+    }
+    /* Product Info */
+    .product-info h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      color: #181d48;
+    }
+    .product-price {
+      font-size: 1.5rem;
+      color: #0db14b;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+    .product-description {
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 2rem;
+      line-height: 1.5;
+    }
+    .add-to-cart-section {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="logo">Local Treasures</div>
+      <nav>
+        <a href="/">Home</a>
+        <a href="ProductsLandingPage.html">Products</a>
+        <a href="KenyaProducts.html" aria-current="page">Kenya</a>
+        <a href="HaitiProducts.html">Haiti</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="cart.html">Cart</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" role="main">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span>›</span>
+      <a href="ProductsLandingPage.html">Products</a>
+      <span>›</span>
+      <span id="currentProductName" aria-current="page">Colorful Ushanga Beads</span>
+    </nav>
+
+    <section class="product-detail">
+      <div class="product-tabs" role="tablist" aria-label="Select a product">
+        <!-- Tabs inserted dynamically -->
+      </div>
+
+      <div id="productsContainer">
+        <!-- Product contents inserted dynamically -->
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-section">
+        <h4>Contact Us</h4>
+        <p>Email: info@localtreasures.com</p>
+        <p>Phone: +254 700 123456 (Kenya)</p>
+        <p>Phone: +509 34 567 890 (Haiti)</p>
+      </div>
+      <div class="footer-section">
+        <h4>Follow Us</h4>
+        <div class="social-links" aria-label="Social media links">
+          <a href="#" aria-label="Facebook" title="Facebook" target="_blank" rel="noopener noreferrer">🔵</a>
+          <a href="#" aria-label="Twitter" title="Twitter" target="_blank" rel="noopener noreferrer">🐦</a>
+          <a href="#" aria-label="Instagram" title="Instagram" target="_blank" rel="noopener noreferrer">📸</a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h4>Newsletter</h4>
+        <p>Subscribe for updates and special offers.</p>
+        <form action="#" method="post" aria-label="Newsletter subscription form">
+          <input
+            type="email"
+            name="email"
+            placeholder="Your email"
+            required
+            style="padding: 0.5rem; border-radius: 4px; border: none; width: 70%; margin-bottom: 0.5rem;"
+          />
+          <br />
+          <button
+            type="submit"
+            style="
+              background-color: #0db14b;
+              color: white;
+              border: none;
+              padding: 0.5rem 1.25rem;
+              border-radius: 4px;
+              cursor: pointer;
+              font-weight: 700;
+              transition: background-color 0.3s ease;
+            "
+            onmouseover="this.style.backgroundColor='#0a8b36'"
+            onmouseout="this.style.backgroundColor='#0db14b'"
+          >
+            Subscribe
+          </button>
+        </form>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const products = [
+      // Kenyan products
+      {
+        id: 'kenya-1',
+        region: 'Kenya',
+        name: 'Colorful Ushanga Beads',
+        price: 15.0,
+        description: 'These vibrant Ushanga beads are handcrafted by skilled Kenyan artisans using traditional techniques passed down through generations. Perfect for making unique jewelry and decorations.',
+        images: [
+          'https://images.unsplash.com/photo-1526045612212-70caf35c14df?auto=format&fit=crop&w=600&q=60',
+          'https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?auto=format&fit=crop&w=600&q=60',
+          'https://images.unsplash.com/photo-1567419231967-3d9f55e49c8f?auto=format&fit=crop&w=600&q=60',
+        ],
+      },
+      {
+        id: 'kenya-2',
+        region: 'Kenya',
+        name: 'Traditional Necklace',
+        price: 25.0,
+        description: 'Beautiful handcrafted traditional necklace from Kenya, made with authentic materials and vibrant colors.',
+        images: [
+          'https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?auto=format&fit=crop&w=600&q=60',
+          'https://images.unsplash.com/photo-1567419231967-3d9f55e49c8f?auto=format&fit=crop&w=600&q=60',
+          'https://images.unsplash.com/photo-1602861954163-b96f80b9e1a7?auto=format&fit=crop&w=600&q=60',
+        ],
+      },
+      // Haitian products
+      {
+        id: 'haiti-1',
+        region: 'Haiti',
+        name: 'Handwoven Basket',
+        price: 30.0,
+        description: 'Handwoven basket crafted by Haitian artisans, perfect for storage or decoration, made from sustainable materials.',
+        images: [
+          'https://images.unsplash.com/photo-1601964374899-90df848dbbbb?auto=format&fit=crop&w=600&q=60',
+          'https://images.unsplash.com/photo-1544974304-42c9c1a3a1bc?auto=format&fit=crop&w=600&q=60',
+          'https://images.unsplash.com/photo-1574170428279-131476d7d8f6?auto=format&fit=crop&w=600&q=60',
+        ],
+      },
+      {
+        id: 'haiti-2',
+        region: 'Haiti',
+        name: 'Colorful Textile',
+        price: 22.0,
+        description: 'Bright and colorful Haitian textile fabric, handcrafted with traditional patterns and vibrant colors.',
+        images: [
+          'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=60',
+          'https://images.unsplash.com/photo-1544974304-42c9c1a3a1bc?auto=format&fit=crop&w=600&q=60',
+        ],
+      },
+    ];
+
+    const tabsContainer = document.querySelector('.product-tabs');
+    const productsContainer = document.getElementById('productsContainer');
+    const breadcrumbProductName = document.getElementById('currentProductName');
+
+    // Create tabs
+    products.forEach((product, index) => {
+      const tab = document.createElement('button');
+      tab.textContent = product.name;
+      tab.className = 'product-tab';
+      tab.setAttribute('role', 'tab');
+      tab.setAttribute('aria-selected', 'false');
+      tab.id = `tab-${product.id}`;
+      tab.setAttribute('aria-controls', `panel-${product.id}`);
+      tab.tabIndex = -1;
+      if (index === 0) {
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+        tab.tabIndex = 0;
+      }
+      tabsContainer.appendChild(tab);
+
+      tab.addEventListener('click', () => {
+        switchProduct(product.id);
+        setFocus(tab);
+      });
+      tab.addEventListener('keydown', e => {
+        let newIndex;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+          e.preventDefault();
+          newIndex = (index + 1) % products.length;
+          tabsContainer.children[newIndex].click();
+        }
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+          e.preventDefault();
+          newIndex = (index - 1 + products.length) % products.length;
+          tabsContainer.children[newIndex].click();
+        }
+      });
+    });
+
+    // Create product panels
+    products.forEach((product, index) => {
+      const panel = document.createElement('div');
+      panel.id = `panel-${product.id}`;
+      panel.className = 'product-content';
+      panel.setAttribute('role', 'tabpanel');
+      panel.setAttribute('aria-labelledby', `tab-${product.id}`);
+      if (index === 0) panel.classList.add('active');
+
+      panel.innerHTML = `
+        <div class="product-images">
+          <img src="${product.images[0]}" alt="${product.name} main image" class="main-image" id="mainImage-${product.id}" />
+          <div class="thumbnail-row" role="list" id="thumbnails-${product.id}">
+            ${product.images
+              .map(
+                (img, i) =>
+                  `<img src="${img.replace('w=600', 'w=100')}" alt="${product.name} thumbnail ${i + 1}" class="thumbnail${i === 0 ? ' active' : ''}" tabindex="0" role="listitem" />`
+              )
+              .join('')}
+          </div>
+        </div>
+        <div class="product-info">
+          <h1>${product.name}</h1>
+          <p class="product-price">$${product.price.toFixed(2)}</p>
+          <p class="product-description">${product.description}</p>
+          <form class="add-to-cart-section" onsubmit="event.preventDefault(); alert('Added ${product.name} to cart!');">
+            <label for="quantity-${product.id}">Quantity:</label>
+            <input type="number" id="quantity-${product.id}" name="quantity" value="1" min="1" />
+            <button type="submit" aria-label="Add ${product.name} to cart">Add to Cart</button>
+          </form>
+        </div>
+      `;
+
+      productsContainer.appendChild(panel);
+
+      // Add image switching functionality
+      const thumbnails = panel.querySelectorAll('.thumbnail');
+      const mainImage = panel.querySelector('.main-image');
+      thumbnails.forEach((thumb, i) => {
+        thumb.addEventListener('click', () => {
+          thumbnails.forEach(t => t.classList.remove('active'));
+          thumb.classList.add('active');
+          mainImage.src = product.images[i];
+          mainImage.alt = `${product.name} main image`;
+        });
+        thumb.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            thumb.click();
+          }
+        });
+      });
+    });
+
+    function switchProduct(productId) {
+      // Update active tab
+      [...tabsContainer.children].forEach(tab => {
+        const selected = tab.id === `tab-${productId}`;
+        tab.classList.toggle('active', selected);
+        tab.setAttribute('aria-selected', selected);
+        tab.tabIndex = selected ? 0 : -1;
+      });
+      // Update visible panel
+      [...productsContainer.children].forEach(panel => {
+        panel.classList.toggle('active', panel.id === `panel-${productId}`);
+      });
+      // Update breadcrumb product name
+      const product = products.find(p => p.id === productId);
+      if (product) {
+        breadcrumbProductName.textContent = product.name;
+      }
+    }
+
+    function setFocus(element) {
+      element.focus();
+    }
+  </script>
+</body>
+</html>

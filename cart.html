@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shopping Cart | Local Treasures</title>
+  <style>
+    /* Reset & base */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      background-color: #fafafa;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    button {
+      cursor: pointer;
+      font-weight: 600;
+      border: none;
+      border-radius: 5px;
+      padding: 0.75rem 1.5rem;
+      background-color: #0db14b;
+      color: white;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #0a8b36;
+    }
+    input[type="number"] {
+      width: 60px;
+      padding: 0.3rem 0.5rem;
+      font-size: 1rem;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 20px 3rem;
+      width: 100%;
+      flex-grow: 1;
+    }
+    /* Header */
+    header {
+      background-color: #181d48;
+      color: white;
+      padding: 1rem 0;
+    }
+    header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+    nav a {
+      margin-left: 1.5rem;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: #0db14b;
+    }
+
+    /* Page Title */
+    .page-title {
+      padding: 2rem 1rem 1.5rem;
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: #181d48;
+    }
+
+    /* Cart Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgb(0 0 0 / 0.1);
+    }
+    thead {
+      background-color: #0db14b;
+      color: white;
+    }
+    th, td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+      vertical-align: middle;
+    }
+    th {
+      font-weight: 700;
+    }
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+    .product-image {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .quantity-input {
+      width: 60px;
+    }
+    .remove-button {
+      background: transparent;
+      color: #c0392b;
+      font-size: 1.2rem;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+    .remove-button:hover {
+      color: #e74c3c;
+    }
+
+    /* Cart Summary */
+    .cart-summary {
+      margin-top: 2rem;
+      text-align: right;
+    }
+    .cart-summary p {
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+      color: #181d48;
+    }
+
+    /* Checkout Button */
+    .checkout-btn {
+      padding: 0.75rem 2rem;
+      font-size: 1.1rem;
+      border-radius: 6px;
+      background-color: #0db14b;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .checkout-btn:hover {
+      background-color: #0a8b36;
+    }
+
+    /* Responsive */
+    @media (max-width: 700px) {
+      th, td {
+        padding: 0.75rem;
+      }
+      .product-image {
+        width: 60px;
+        height: 60px;
+      }
+    }
+     /* Footer */
+    footer {
+      background-color: #181d48;
+      color: white;
+      padding: 2rem 1rem;
+      margin-top: auto;
+    }
+    footer .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+    footer .footer-section {
+      flex: 1 1 250px;
+    }
+    footer h4 {
+      margin-bottom: 1rem;
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+    footer p, footer a {
+      color: #ccc;
+      font-weight: 400;
+    }
+    footer a:hover {
+      color: #0db14b;
+    }
+    footer .social-links a {
+      margin-right: 1rem;
+      font-size: 1.5rem;
+      color: #ccc;
+      transition: color 0.3s ease;
+    }
+    footer .social-links a:hover {
+      color: #0db14b;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .hero-content h1 {
+        font-size: 2.25rem;
+      }
+      .features {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="logo">Local Treasures</div>
+      <nav>
+        <a href="/">Home</a>
+        <a href="ProductsLandingPage.html">Products</a>
+        <a href="cart.html" aria-current="page">Cart</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" role="main">
+    <h1 class="page-title">Your Shopping Cart</h1>
+
+    <table aria-label="Shopping cart items">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Subtotal</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody id="cartItems">
+        <!-- Cart items inserted by JavaScript -->
+      </tbody>
+    </table>
+
+    <div class="cart-summary" aria-live="polite" aria-atomic="true">
+      <p id="totalAmount">Total: $0.00</p>
+      <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-section">
+        <h4>Contact Us</h4>
+        <p>Email: info@localtreasures.com</p>
+        <p>Phone: +254 700 123456 (Kenya)</p>
+        <p>Phone: +509 34 567 890 (Haiti)</p>
+      </div>
+      <div class="footer-section">
+        <h4>Follow Us</h4>
+        <div class="social-links" aria-label="Social media links">
+          <a href="#" aria-label="Facebook" title="Facebook" target="_blank" rel="noopener noreferrer">🔵</a>
+          <a href="#" aria-label="Twitter" title="Twitter" target="_blank" rel="noopener noreferrer">🐦</a>
+          <a href="#" aria-label="Instagram" title="Instagram" target="_blank" rel="noopener noreferrer">📸</a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h4>Newsletter</h4>
+        <p>Subscribe for updates and special offers.</p>
+        <form action="#" method="post" aria-label="Newsletter subscription form">
+          <input
+            type="email"
+            name="email"
+            placeholder="Your email"
+            required
+            style="padding: 0.5rem; border-radius: 4px; border: none; width: 70%; margin-bottom: 0.5rem;"
+          />
+          <br />
+          <button
+            type="submit"
+            style="
+              background-color: #0db14b;
+              color: white;
+              border: none;
+              padding: 0.5rem 1.25rem;
+              border-radius: 4px;
+              cursor: pointer;
+              font-weight: 700;
+              transition: background-color 0.3s ease;
+            "
+            onmouseover="this.style.backgroundColor='#0a8b36'"
+            onmouseout="this.style.backgroundColor='#0db14b'"
+          >
+            Subscribe
+          </button>
+        </form>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Sample cart data - in real app this comes from storage or backend
+    let cart = [
+      {
+        id: 1,
+        name: 'Colorful Ushanga Beads',
+        price: 15.0,
+        quantity: 2,
+        image: 'https://images.unsplash.com/photo-1526045612212-70caf35c14df?auto=format&fit=crop&w=80&q=60'
+      },
+      {
+        id: 2,
+        name: 'Handwoven Basket',
+        price: 30.0,
+        quantity: 1,
+        image: 'https://images.unsplash.com/photo-1601964374899-90df848dbbbb?auto=format&fit=crop&w=80&q=60'
+      }
+    ];
+
+    const cartItemsEl = document.getElementById('cartItems');
+    const totalAmountEl = document.getElementById('totalAmount');
+
+    function renderCart() {
+      cartItemsEl.innerHTML = '';
+      let total = 0;
+
+      cart.forEach(item => {
+        const subtotal = item.price * item.quantity;
+        total += subtotal;
+
+        const tr = document.createElement('tr');
+
+        tr.innerHTML = `
+          <td><img src="${item.image}" alt="${item.name}" class="product-image" /></td>
+          <td>${item.name}</td>
+          <td>$${item.price.toFixed(2)}</td>
+          <td>
+            <input type="number" class="quantity-input" min="1" value="${item.quantity}" 
+              aria-label="Quantity of ${item.name}" onchange="updateQuantity(${item.id}, this.value)" />
+          </td>
+          <td>$${subtotal.toFixed(2)}</td>
+          <td><button class="remove-button" aria-label="Remove ${item.name} from cart" onclick="removeItem(${item.id})">&times;</button></td>
+        `;
+
+        cartItemsEl.appendChild(tr);
+      });
+
+      totalAmountEl.textContent = `Total: $${total.toFixed(2)}`;
+    }
+
+    function updateQuantity(id, newQty) {
+      newQty = parseInt(newQty);
+      if (newQty < 1) return;
+      const item = cart.find(i => i.id === id);
+      if (item) {
+        item.quantity = newQty;
+        renderCart();
+      }
+    }
+
+    function removeItem(id) {
+      cart = cart.filter(i => i.id !== id);
+      renderCart();
+    }
+
+    function checkout() {
+      if (cart.length === 0) {
+        alert('Your cart is empty!');
+        return;
+      }
+      alert('Proceeding to checkout...');
+      // Redirect to checkout page or implement checkout logic
+    }
+
+    // Initial render
+    renderCart();
+  </script>
+</body>
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Haitian Products | Local Treasures</title>
+  <style>
+    /* Reset & base */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      background-color: #fafafa;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    button {
+      cursor: pointer;
+      font-weight: 600;
+      border: none;
+      border-radius: 5px;
+      padding: 0.5rem 1rem;
+      background-color: #0db14b;
+      color: white;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #0a8b36;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px 3rem;
+      width: 100%;
+      flex-grow: 1;
+    }
+    /* Header */
+    header {
+      background-color: #181d48;
+      color: white;
+      padding: 1rem 0;
+    }
+    header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+    nav a {
+      margin-left: 1.5rem;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: #0db14b;
+    }
+    nav a[aria-current="page"] {
+      color: #0db14b;
+      font-weight: 700;
+    }
+
+    /* Page Title and Intro */
+    .page-title {
+      padding: 2.5rem 1rem 1rem;
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: #181d48;
+    }
+    .intro-text {
+      max-width: 700px;
+      margin: 0 auto 3rem;
+      text-align: center;
+      font-weight: 500;
+      font-size: 1.15rem;
+      color: #555;
+      line-height: 1.5;
+    }
+
+    /* Product Grid */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+    }
+    .product-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgb(0 0 0 / 0.1);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow 0.3s ease;
+    }
+    .product-card:hover {
+      box-shadow: 0 10px 25px rgb(0 0 0 / 0.15);
+    }
+    .product-card img {
+      height: 180px;
+      object-fit: cover;
+      width: 100%;
+    }
+    .product-info {
+      padding: 1rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .product-info h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: #181d48;
+    }
+    .product-info p {
+      color: #0db14b;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #181d48;
+      color: white;
+      padding: 2rem 1rem;
+      margin-top: auto;
+    }
+    footer .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+    footer .footer-section {
+      flex: 1 1 250px;
+    }
+    footer h4 {
+      margin-bottom: 1rem;
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+    footer p, footer a {
+      color: #ccc;
+      font-weight: 400;
+    }
+    footer a:hover {
+      color: #0db14b;
+    }
+    footer .social-links a {
+      margin-right: 1rem;
+      font-size: 1.5rem;
+      color: #ccc;
+      transition: color 0.3s ease;
+    }
+    footer .social-links a:hover {
+      color: #0db14b;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="logo">Local Treasures</div>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/products">Products</a>
+        <a href="/products/kenya">Kenya</a>
+        <a href="/products/haiti" aria-current="page">Haiti</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+        <a href="/cart">Cart</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" role="main">
+    <h1 class="page-title">Haitian Products</h1>
+    <p class="intro-text">
+      Discover the vibrant culture of Haiti through our curated selection of handmade artisan crafts and local treasures. Each product is a unique expression of Haitian heritage.
+    </p>
+
+    <section class="product-grid" aria-label="Haitian products listing">
+      <article class="product-card" tabindex="0">
+        <img src="Handwooven Basken.jpg" alt="Handwoven Haitian Basket" />
+        <div class="product-info">
+          <h3>Handwoven Basket</h3>
+          <p>$30.00</p>
+          <button type="button" aria-label="Add Handwoven Basket to cart">Add to Cart</button>
+        </div>
+      </article>
+
+      <article class="product-card" tabindex="0">
+        <img src="Jewelerry1.webp" alt="Haitian Handcrafted Jewelry" />
+        <div class="product-info">
+          <h3>Haitian Jewelry</h3>
+          <p>$28.00</p>
+          <button type="button" aria-label="Add Haitian Jewelry to cart">Add to Cart</button>
+        </div>
+      </article>
+
+      <article class="product-card" tabindex="0">
+        <img src="HandPaintings.jpg" alt="Colorful Haitian Textile" />
+        <div class="product-info">
+          <h3>Colorful Textile</h3>
+          <p>$22.00</p>
+          <button type="button" aria-label="Add Colorful Textile to cart">Add to Cart</button>
+        </div>
+      </article>
+
+      <article class="product-card" tabindex="0">
+        <img src="potter.jpg" alt="Haitian Handmade Pottery" />
+        <div class="product-info">
+          <h3>Handmade Pottery</h3>
+          <p>$35.00</p>
+          <button type="button" aria-label="Add Handmade Pottery to cart">Add to Cart</button>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-section">
+        <h4>Contact Us</h4>
+        <p>Email: info@localtreasures.com</p>
+        <p>Phone: +254 700 123456 (Kenya)</p>
+        <p>Phone: +509 34 567 890 (Haiti)</p>
+      </div>
+      <div class="footer-section">
+        <h4>Follow Us</h4>
+        <div class="social-links" aria-label="Social media links">
+          <a href="#" aria-label="Facebook" title="Facebook" target="_blank" rel="noopener noreferrer">🔵</a>
+          <a href="#" aria-label="Twitter" title="Twitter" target="_blank" rel="noopener noreferrer">🐦</a>
+          <a href="#" aria-label="Instagram" title="Instagram" target="_blank" rel="noopener noreferrer">📸</a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h4>Newsletter</h4>
+        <p>Subscribe for updates and special offers.</p>
+        <form action="#" method="post" aria-label="Newsletter subscription form">
+          <input
+            type="email"
+            name="email"
+            placeholder="Your email"
+            required
+            style="padding: 0.5rem; border-radius: 4px; border: none; width: 70%; margin-bottom: 0.5rem;"
+          />
+          <br />
+          <button
+            type="submit"
+            style="
+              background-color: #0db14b;
+              color: white;
+              border: none;
+              padding: 0.5rem 1.25rem;
+              border-radius: 4px;
+              cursor: pointer;
+              font-weight: 700;
+              transition: background-color 0.3s ease;
+            "
+            onmouseover="this.style.backgroundColor='#0a8b36'"
+            onmouseout="this.style.backgroundColor='#0db14b'"
+          >
+            Subscribe
+          </button>
+        </form>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

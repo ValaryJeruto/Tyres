@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About Us | Local Treasures</title>
+  <style>
+    /* Reset & base */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #fafafa;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.6;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 20px 3rem;
+      width: 100%;
+      flex-grow: 1;
+    }
+    /* Header */
+    header {
+      background-color: #181d48;
+      color: white;
+      padding: 1rem 0;
+    }
+    header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+    nav a {
+      margin-left: 1.5rem;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: #0db14b;
+    }
+    nav a[aria-current="page"] {
+      color: #0db14b;
+      font-weight: 700;
+    }
+
+    /* Page Title */
+    .page-title {
+      padding: 2rem 1rem 1.5rem;
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: #181d48;
+    }
+
+    /* Content */
+    .content {
+      background: white;
+      padding: 2rem 3rem;
+      border-radius: 12px;
+      box-shadow: 0 8px 25px rgb(0 0 0 / 0.1);
+      font-size: 1.1rem;
+      color: #444;
+      line-height: 1.8;
+    }
+    .content h2 {
+      margin-bottom: 1rem;
+      color: #181d48;
+      font-weight: 700;
+    }
+    .content p {
+      margin-bottom: 1.25rem;
+    }
+    .mission-statement {
+      background-color: #0db14b;
+      color: white;
+      padding: 1.5rem 2rem;
+      border-radius: 10px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 2rem 0;
+      text-align: center;
+      box-shadow: 0 4px 10px rgb(0 0 0 / 0.1);
+    }
+    .artisan-story {
+      background-color: #f4f9f4;
+      border-left: 6px solid #0db14b;
+      padding: 1rem 1.5rem;
+      margin: 2rem 0;
+      border-radius: 8px;
+      font-style: italic;
+    }
+    /* Footer */
+    footer {
+      background-color: #181d48;
+      color: white;
+      padding: 2rem 1rem;
+      margin-top: auto;
+    }
+    footer .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+    footer .footer-section {
+      flex: 1 1 250px;
+    }
+    footer h4 {
+      margin-bottom: 1rem;
+      font-weight: 700;
+      font-size: 1.25rem;
+    }
+    footer p, footer a {
+      color: #ccc;
+      font-weight: 400;
+    }
+    footer a:hover {
+      color: #0db14b;
+    }
+    footer .social-links a {
+      margin-right: 1rem;
+      font-size: 1.5rem;
+      color: #ccc;
+      transition: color 0.3s ease;
+    }
+    footer .social-links a:hover {
+      color: #0db14b;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .hero-content h1 {
+        font-size: 2.25rem;
+      }
+      .features {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="logo">Local Treasures</div>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/products">Products</a>
+        <a href="/about" aria-current="page">About</a>
+        <a href="/contact">Contact</a>
+        <a href="/cart">Cart</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" role="main">
+    <h1 class="page-title">About Local Treasures</h1>
+
+    <div class="content">
+      <p>
+        Local Treasures is dedicated to empowering local artisans and communities in Kenya and Haiti by providing a global platform to showcase and sell their authentic handcrafted products.
+        We believe in fostering sustainable economic growth by connecting buyers directly to the rich culture and craftsmanship behind every item.
+      </p>
+
+      <div class="mission-statement" aria-label="Project Trinite mission statement">
+        Our mission is to uplift communities through innovation, partnership, and technology — promoting social impact by marketing local products with transparency, respect, and care.
+      </div>
+
+      <h2>What We Do</h2>
+      <p>
+        We work closely with artisans, cooperatives, and local entrepreneurs in Kenya and Haiti to curate unique products that tell stories of heritage and tradition. Our platform ensures fair trade, quality assurance, and direct support to the makers.
+      </p>
+
+      <h2>Our Commitment</h2>
+      <p>
+        At Local Treasures, every purchase contributes to community development projects, educational initiatives, and environmental sustainability efforts in the regions we serve.
+        Transparency and integrity guide every step of our process, building trust between consumers and producers worldwide.
+      </p>
+
+      <h2>Artisan Stories</h2>
+
+      <section class="artisan-story" aria-label="Haitian artisans story">
+        <strong>The Story of Haitian Artisans</strong><br />
+        In the vibrant communities of Haiti, artistry is woven into the very fabric of daily life. Haitian artisans blend centuries-old traditions with bold creativity, crafting products that celebrate resilience and cultural pride. From handwoven baskets to colorful textiles and intricate jewelry, each piece tells a story of heritage passed from generation to generation.<br /><br />
+        Local Treasures partners directly with these artisans, ensuring their skills are honored and their livelihoods supported. Every handcrafted item embodies the spirit of Haiti—full of life, hope, and the power of community. By connecting their work to a global audience, we help sustain these traditions and uplift entire communities, fostering economic growth and preserving an invaluable cultural legacy.
+      </section>
+
+      <section class="artisan-story" aria-label="Kenyan artisans story">
+        <strong>The Story of Kenyan Artisans</strong><br />
+        Across the sunlit plains and bustling markets of Kenya, artisans transform natural materials into vibrant expressions of identity and history. The iconic Ushanga beads—small but mighty—are carefully strung into necklaces, bracelets, and ornaments that have symbolized social bonds and storytelling for generations.<br /><br />
+        At Local Treasures, we celebrate this rich heritage by empowering Kenyan artisans through fair trade and partnership. Each handcrafted product reflects dedication, artistry, and the deep connection to community values. By sharing these treasures with the world, we create opportunities that nurture education, preserve traditions, and build brighter futures for the makers and their families.
+      </section>
+
+      <h2>Join Us</h2>
+      <p>
+        Whether you're an artisan wanting to showcase your work or a conscious buyer seeking meaningful products, Local Treasures welcomes you. Together, we create a positive ripple of change — one treasure at a time.
+      </p>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-section">
+        <h4>Contact Us</h4>
+        <p>Email: info@localtreasures.com</p>
+        <p>Phone: +254 700 123456 (Kenya)</p>
+        <p>Phone: +509 34 567 890 (Haiti)</p>
+      </div>
+      <div class="footer-section">
+        <h4>Follow Us</h4>
+        <div class="social-links" aria-label="Social media links">
+          <a href="#" aria-label="Facebook" title="Facebook" target="_blank" rel="noopener noreferrer">🔵</a>
+          <a href="#" aria-label="Twitter" title="Twitter" target="_blank" rel="noopener noreferrer">🐦</a>
+          <a href="#" aria-label="Instagram" title="Instagram" target="_blank" rel="noopener noreferrer">📸</a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h4>Newsletter</h4>
+        <p>Subscribe for updates and special offers.</p>
+        <form action="#" method="post" aria-label="Newsletter subscription form">
+          <input
+            type="email"
+            name="email"
+            placeholder="Your email"
+            required
+            style="padding: 0.5rem; border-radius: 4px; border: none; width: 70%; margin-bottom: 0.5rem;"
+          />
+          <br />
+          <button
+            type="submit"
+            style="
+              background-color: #0db14b;
+              color: white;
+              border: none;
+              padding: 0.5rem 1.25rem;
+              border-radius: 4px;
+              cursor: pointer;
+              font-weight: 700;
+              transition: background-color 0.3s ease;
+            "
+            onmouseover="this.style.backgroundColor='#0a8b36'"
+            onmouseout="this.style.backgroundColor='#0db14b'"
+          >
+            Subscribe
+          </button>
+        </form>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
